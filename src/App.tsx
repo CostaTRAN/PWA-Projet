@@ -1,14 +1,18 @@
 import MovieHeader from "./design/molecules/MovieHeader";
-import { MovieList } from "./MovieList/MovieList";
-import { MovieListContainer } from "./MovieList/MovieList";
-import movies from "./repository/data.json";
+import { MovieList } from "./pages/MovieList/MovieList";
+import { MovieListContainer } from "./pages/MovieList/MovieList";
+//import movies from "./repository/data.json";
+import { useFetchMovies } from "./services/fetchMovies";
 
 function App() {
+
+  const { data:movies , isLoading , isError } = useFetchMovies();
 
   return (
     <MovieListContainer>
       <MovieHeader/>
-      <MovieList movies={ movies.results }/>
+      { isLoading ? <div>Loading...</div> : <MovieList movies={ movies }/>}
+      { isError && <div>Error</div>}
     </MovieListContainer>
   )
 }
