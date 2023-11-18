@@ -8,14 +8,14 @@ const Header = styled("div")({
     "@media (min-width:640px)":{
       justifyContent: "space-between",
     },
-    gap: "0.5rem"
-});
+    gap: "1rem"
+})
 
 function MovieHeader() {
   return (
     <Header>
       <Title>🎬🍿 Movie library</Title>
-      <Search placeholder='🔎 Search for movie' />
+      <Search placeholder=' 🔎 Search for movie' />
     </Header>
   )
 }
