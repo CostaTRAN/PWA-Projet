@@ -22,20 +22,33 @@ const Image = styled("img")({
     borderRadius: "0.375rem",
 })
 
+interface Image {
+    id:string;
+    iso_639_1: string | null;
+    file_path: string;
+}
+
 function MovieImages(/*{ images }: { images: string[] }*/) {    
     const { id } = useParams<{ id: string }>();
     const { data:images , isLoading , isError } = useFetchMovieImages(id as unknown as string);
 
+    if( isLoading ){
+        return(<div>Loading...</div>)
+    }
+
+    const filteredImages = images?.backdrops.filter(
+        (image:Image) =>
+        image.iso_639_1 == null
+    );
+
     return (
         <div>
             <Title>Images</Title>
-            { isLoading ? <div>Loading...</div> :
             <ImagesContainer>
-                { images?.backdrops.map((image: any) => (
-                    <Image src={`https://image.tmdb.org/t/p/original/${image.file_path}`} alt="movie image" />
+                { filteredImages?.map((image: any) => (
+                    <Image src={`https://image.tmdb.org/t/p/original/${image.file_path}`} alt="movie image" key={image.id} />
                 ))}
             </ImagesContainer>
-            }
             { isError && <div>Error</div> }
         </div>
     )

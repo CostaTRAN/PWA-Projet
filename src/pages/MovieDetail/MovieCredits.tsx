@@ -45,13 +45,15 @@ const CrewMemberCharacter = styled("p")({
 function MovieCredits() {
     const { id } = useParams<{ id: string }>();
     const { data:credits , isLoading , isError } = useFetchMovieCredits(id as unknown as string);
+    const castMembers = credits?.cast.slice(0, 10);
+    const crewMembers = credits?.crew.filter((crewMember:any) => crewMember.job === "Director" || crewMember.job === "Original Music Composer");
 
     return (
         <div>
             <Title>Credits</Title>
             { isLoading ? <div>Loading...</div> :
                 <CastCard >
-                    { credits.cast.map((crewMember : {id:number, name:string, character:string, profile_path:string}) => (
+                    { castMembers.map((crewMember : {id:number, name:string, character:string, profile_path:string}) => (
                     <CrewMember key={crewMember.id}>
 
                         { crewMember.profile_path != null ?
@@ -61,6 +63,18 @@ function MovieCredits() {
                         }
                         <CrewMemberName>{crewMember.name}</CrewMemberName>
                         <CrewMemberCharacter>{crewMember.character}</CrewMemberCharacter>
+                    </CrewMember>)) }
+
+                    { crewMembers.map((crewMember : {id:number, name:string, job:string, profile_path:string}) => (
+                    <CrewMember key={crewMember.id}>
+
+                        { crewMember.profile_path != null ?
+                            <CrewMemberImage src={`https://image.tmdb.org/t/p/original/${crewMember.profile_path}`} alt={crewMember.name} />
+                            :
+                            <CrewMemberImage src={noImage} alt={crewMember.name + " No Image"} />
+                        }
+                        <CrewMemberName>{crewMember.name}</CrewMemberName>
+                        <CrewMemberCharacter>{crewMember.job}</CrewMemberCharacter>
                     </CrewMember>)) }
                 </CastCard> 
             }
