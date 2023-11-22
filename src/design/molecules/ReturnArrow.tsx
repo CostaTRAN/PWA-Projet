@@ -1,22 +1,6 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`;
-
-const BackArrow = styled("div")({
-  height: "24px",
-  gap: "0.25rem",
-  color: "rgb(255, 255, 255)",
-  padding: "1rem",
-  backdropFilter: "blur(35px)",
-  overflow: "hidden",
-  display: "flex",
-  flex: "1",
-});
-
 function ReturnArrow() {
   return (
     <StyledLink to={"/"}>
@@ -32,3 +16,18 @@ function ReturnArrow() {
 }
 
 export default ReturnArrow;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
+const BackArrow = styled("div")({
+  height: "24px",
+  gap: "0.25rem",
+  color: "rgb(255, 255, 255)",
+  padding: "1rem",
+  overflow: "hidden",
+  display: "flex",
+  flex: "1",
+});

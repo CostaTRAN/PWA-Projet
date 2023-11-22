@@ -1,6 +1,22 @@
 import styled from "@emotion/styled";
+import noImage from "/NoImagePeople.svg";
+import { imageBaseURL } from "../../services/configServices";
 
-const Card = styled("div")({
+export const CreditCard = ({name, profile_path, role} : {name:string, profile_path: string, role:string}) => {
+    return (
+        <Card>
+            {profile_path != null ?
+                <Image src={`${imageBaseURL}${profile_path}`} alt={name} />
+                :
+                <Image src={noImage} alt={name + " No Image"} />
+            }
+            <Name>{name}</Name>
+            <Role>{role}</Role>
+        </Card>
+    )
+  };
+
+  const Card = styled("div")({
     minWidth: "200px",
 })
 
@@ -23,11 +39,3 @@ const Role = styled("p")({
     lineHeight: "1rem",
     margin:"0"
 })
-
-export const CreditCard = ({id, poster_path} : {id:string, poster_path: string}) => {
-    return (
-        <Card>
-            {id}
-        </Card>
-    )
-  };

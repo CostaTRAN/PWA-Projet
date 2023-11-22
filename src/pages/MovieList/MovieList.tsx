@@ -1,6 +1,6 @@
 import { Grid } from "../../design/interfaces/Grid";
 import { MovieCard } from "../../design/molecules/MovieCard";
-import { Movie } from "../../repository/models/Movie";
+import { Movie } from "../../repository/interfaces/Movie";
 
 function MovieList ({movies} : {movies: Movie[]}) {
     if (!Array.isArray(movies)) {
