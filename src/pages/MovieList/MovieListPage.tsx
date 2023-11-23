@@ -5,6 +5,7 @@
   import { Search } from "./design/atoms/Search";
   import { Title } from "./design/atoms/Title";
   import { useState } from "react";
+  import MovieListLoading from "./MovieListLoading";
 
   function App() {
 
@@ -46,12 +47,12 @@
 
       { Input == "" ? (
           <>
-            {isLoadingCurrent ? <div>Loading...</div> : <MovieList movies={moviesCurrent} />}
+            {isLoadingCurrent ? <MovieListLoading/> : <MovieList movies={moviesCurrent} />}
             {isErrorCurrent && <div>Error</div>}
           </>
         ) : (
           <>
-            {isLoadingSearched ? <div>Loading...</div> : <MovieList movies={moviesSearched || []} />}
+            {isLoadingSearched ? <MovieListLoading/> : <MovieList movies={moviesSearched || []} />}
             {isErrorSearched && <div>Error</div>}
           </>
         )
