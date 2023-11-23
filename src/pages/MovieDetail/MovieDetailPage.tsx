@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import { useFetchMovieById } from "../../services/fetchMovieById";
+import { useFetchMovieById } from "./repository/services/fetchMovieById";
 import { useParams } from "react-router-dom";
-import { imageBaseURL } from "../../services/configServices"
-import MovieDetail from "./MovieDetail";
-import MovieCredits from "./MovieCredits";
-import MovieImages from "./MovieImages";
+import { imageBaseURL } from "./repository/services/configServices"
+import MovieDetail from "./design/molecules/MovieDetail";
+import MovieCredits from "./design/molecules/MovieCredits";
+import MovieImages from "./design/molecules/MovieImages";
 
 function MoviePage() {
     const { id } = useParams<{ id: string }>();

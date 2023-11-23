@@ -1,9 +1,12 @@
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
-import { useFetchMovieImages } from "../../services/fetchMovieImages";
-import { imageBaseURL } from "../../services/configServices"
+import { useFetchMovieImages } from "../../repository/services/fetchMovieImages";
+import { imageBaseURL } from "../../repository/services/configServices";
+import { Image } from "../../repository/interfaces/Image";
 
-function MovieImages(/*{ images }: { images: string[] }*/) {    
+import { MovieImage } from "../atoms/MovieImage";
+
+function MovieImages() {    
     const { id } = useParams<{ id: string }>();
     const { data:images , isLoading , isError } = useFetchMovieImages(id as unknown as string);
 
@@ -20,8 +23,8 @@ function MovieImages(/*{ images }: { images: string[] }*/) {
         <div>
             <Title>Images</Title>
             <ImagesContainer>
-                { filteredImages?.map((image: any) => (
-                    <Image src={`${imageBaseURL}${image.file_path}`} alt="movie image" key={image.id} />
+                { filteredImages?.map((image: any, id:number) => (
+                    <MovieImage key={id} src={`${imageBaseURL}${image.file_path}`} alt="movie image" />
                 ))}
             </ImagesContainer>
             { isError && <div>Error</div> }
@@ -43,10 +46,4 @@ const ImagesContainer = styled("div")({
     overflowX: "scroll",
     gap: "1.5rem",
     paddingTop: "0.5rem",
-})
-
-const Image = styled("img")({
-    width: "1200px",
-    maxWidth: "100%",
-    borderRadius: "0.375rem",
 })

@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { configServices } from "./configServices";
-import { Movie } from "../repository/interfaces/Movie";
+import { Movie } from "../interfaces/Movie";
 
 const fetchMovieByName = async (name: string) => {
     const response = await fetch(`${configServices.apiSearchURL}${name}`, { headers: { "Authorization": `Bearer ${configServices.apiBearerToken} `} });

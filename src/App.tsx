@@ -1,64 +1,16 @@
-  import styled from "@emotion/styled";
-  import MovieList from "./pages/MovieList/MovieList";
-  import { useFetchMovies } from "./services/fetchMovies";
-  import { useFetchMovieByName } from "./services/fetchMovieByName";
-  import { Search } from "./design/atoms/Search";
-  import { Title } from "./design/atoms/Title";
-  import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import MovieListPage from "./pages/MovieList/MovieListPage";
+import MovieDetailPage from "./pages/MovieDetail/MovieDetailPage";
 
-  function App() {
-
-    const { data:moviesCurrent , isLoading: isLoadingCurrent , isError: isErrorCurrent } = useFetchMovies();
-
-    const [Input, setInput] = useState("");
-    const { data:moviesSearched , isLoading: isLoadingSearched, isError: isErrorSearched } = useFetchMovieByName(Input);
-
-    const MovieListContainer = styled("main")({
-      display: "flex",
-      flexDirection: "column",
-      gap: "1.5rem",
-      padding: "3rem",
-      minHeight: "100vh",
-      "@media (prefers-color-scheme: dark)": {
-          backgroundColor: "rgb(31 41 55);",
-      },
-    })
-    
-    const Header = styled("div")({
-      display: "flex",
-      flexWrap: "wrap",
-      "@media (min-width:640px)":{
-        justifyContent: "space-between",
-      },
-      gap: "1rem"
-    })
-
-    const handleInputChange = (value: string) => {
-      setInput(value);
-    }
-
+function App() {
     return (
-      <MovieListContainer>
-        <Header>
-          <Title>🎬🍿 Movie library</Title>
-          <Search type="text" placeholder=' 🔎 Search for movie' value={Input} onChange={(event) => handleInputChange(event.target.value)} id="searchInput" autoFocus/>
-        </Header>
+      <Routes>
 
-      { Input == "" ? (
-          <>
-            {isLoadingCurrent ? <div>Loading...</div> : <MovieList movies={moviesCurrent} />}
-            {isErrorCurrent && <div>Error</div>}
-          </>
-        ) : (
-          <>
-            {isLoadingSearched ? <div>Loading...</div> : <MovieList movies={moviesSearched} />}
-            {isErrorSearched && <div>Error</div>}
-          </>
-        )
-      }
+        <Route path="/" element={<MovieListPage />} />
+        <Route path="/movie/:id" element={<MovieDetailPage />} />
 
-      </MovieListContainer>
-    )
-  }
+      </Routes>
+    );
+}
 
-  export default App
+export default App;

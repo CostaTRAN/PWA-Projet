@@ -12,7 +12,7 @@ function ReturnArrow() {
         Back
       </BackArrow>
     </StyledLink>
-  );
+  )
 }
 
 export default ReturnArrow;
@@ -22,6 +22,7 @@ const StyledLink = styled(Link)`
   color: inherit;
 `;
 
+//à déplacer dans un atom
 const BackArrow = styled("div")({
   height: "24px",
   gap: "0.25rem",

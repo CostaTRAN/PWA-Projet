@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
-import { useFetchMovieCredits } from "../../services/fetchMovieCredits";
-import { CreditCard } from "../../design/molecules/CreditCard";
+import { useFetchMovieCredits } from "../../repository/services/fetchMovieCredits";
+import { CreditCard } from "./CreditCard";
 
 function MovieCredits() {
     const { id } = useParams<{ id: string }>();
     const { data:credits , isLoading , isError } = useFetchMovieCredits(id as unknown as string);
+
     const castMembers = credits?.cast.slice(0, 10);
     const crewMembers = credits?.crew.filter((crewMember:any) => crewMember.job === "Director" || crewMember.job === "Original Music Composer");
 
@@ -24,7 +25,7 @@ function MovieCredits() {
                             <CreditCard key={crewMember.id} name={crewMember.name} profile_path={crewMember.profile_path} role={crewMember.job}/>
                         ))
                     }
-                </Container> 
+                </Container>
             }
             { isError && <div>Error</div> }
         </div>

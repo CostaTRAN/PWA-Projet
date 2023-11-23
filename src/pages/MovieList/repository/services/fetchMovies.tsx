@@ -6,6 +6,7 @@ const fetchMoviesNowPlaying = async () => {
     const {results} = await response.json();
     return results;
 }
+
 export const useFetchMovies = () => {
     return useQuery('movies', fetchMoviesNowPlaying);
 }

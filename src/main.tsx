@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import AppRouter from './AppRouter.tsx'
+import App from './App.tsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
 
-        <AppRouter />
+        <App />
         
       </BrowserRouter>
     </QueryClientProvider>
