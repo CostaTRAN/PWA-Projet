@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Search = styled("input")({
-    paddingLeft: "4px",
+    paddingLeft: "1rem",
     borderRadius: "9999px",
     border: "none",
     minWidth:"100%",
